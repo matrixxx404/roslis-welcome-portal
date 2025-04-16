@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,10 +20,10 @@ export default {
 		extend: {
 			colors: {
 				roslis: {
-					primary: '#2A2F4F',
-					secondary: '#917FB3',
-					accent: '#E5BEEC',
-					background: '#FDE2F3',
+					primary: '#2F4E3C',
+					secondary: '#FCFEF3',
+					accent: '#D8C6B8',
+					background: '#F9F1E4',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
