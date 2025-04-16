@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar/Navbar";
 import { useAuth } from "@/hooks/useAuth";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { LogIn, Users } from "lucide-react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -31,16 +31,23 @@ const LoginPage = () => {
             {isRcoMember ? "RCO Member Login" : "Login to ROSLIS"}
           </h2>
           
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <Label htmlFor="rco-mode" className="text-sm text-gray-600">Standard Login</Label>
-            <Switch 
-              id="rco-mode" 
-              checked={isRcoMember} 
-              onCheckedChange={setIsRcoMember}
-            />
-            <Label htmlFor="rco-mode" className="text-sm font-medium text-roslis-primary">
-              RCO Member
-            </Label>
+          <div className="flex items-center justify-center space-x-4 mb-6">
+            <Button
+              type="button"
+              variant={!isRcoMember ? "default" : "outline"} 
+              className={!isRcoMember ? "bg-roslis-primary" : "border-roslis-primary text-roslis-primary"}
+              onClick={() => setIsRcoMember(false)}
+            >
+              <LogIn className="mr-2 h-4 w-4" /> Login
+            </Button>
+            <Button
+              type="button"
+              variant={isRcoMember ? "default" : "outline"}
+              className={isRcoMember ? "bg-roslis-primary" : "border-roslis-primary text-roslis-primary"}
+              onClick={() => setIsRcoMember(true)}
+            >
+              <Users className="mr-2 h-4 w-4" /> RCO Sign Up
+            </Button>
           </div>
           
           {error && (
