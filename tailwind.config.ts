@@ -19,6 +19,13 @@ export default {
 		},
 		extend: {
 			colors: {
+				roslis: {
+					primary: '#2A2F4F',
+					secondary: '#917FB3',
+					accent: '#E5BEEC',
+					background: '#FDE2F3',
+				},
+			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
