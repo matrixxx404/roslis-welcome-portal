@@ -3,16 +3,20 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar/Navbar";
 import { useAuth } from "@/hooks/useAuth";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRcoMember, setIsRcoMember] = useState(false);
   const { loginUser, loading, error } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = await loginUser(email, password);
+    // Pass the isRcoMember flag to the loginUser function
+    const success = await loginUser(email, password, isRcoMember);
     if (success) {
       navigate("/dashboard");
     }
@@ -23,7 +27,21 @@ const LoginPage = () => {
       <Navbar />
       <div className="container mx-auto p-8 flex justify-center items-center">
         <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-center mb-6 text-roslis-primary">Login to ROSLIS</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-roslis-primary">
+            {isRcoMember ? "RCO Member Login" : "Login to ROSLIS"}
+          </h2>
+          
+          <div className="flex items-center justify-center space-x-2 mb-6">
+            <Label htmlFor="rco-mode" className="text-sm text-gray-600">Standard Login</Label>
+            <Switch 
+              id="rco-mode" 
+              checked={isRcoMember} 
+              onCheckedChange={setIsRcoMember}
+            />
+            <Label htmlFor="rco-mode" className="text-sm font-medium text-roslis-primary">
+              RCO Member
+            </Label>
+          </div>
           
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -65,7 +83,7 @@ const LoginPage = () => {
               className="w-full bg-roslis-primary text-white py-2 px-4 rounded-md hover:bg-roslis-secondary transition-colors"
               disabled={loading}
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Logging in..." : isRcoMember ? "Login as RCO Member" : "Login"}
             </button>
           </form>
           
