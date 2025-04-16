@@ -10,12 +10,15 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const loginUser = async (email: string, password: string) => {
+  const loginUser = async (email: string, password: string, isRcoMember: boolean = false) => {
     setLoading(true);
     setError(null);
     
     try {
-      const response = await fetch(`${BASE_URL}/auth/login`, {
+      // Use different endpoint based on user type
+      const endpoint = isRcoMember ? `${BASE_URL}/auth/rco-login` : `${BASE_URL}/auth/login`;
+      
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
