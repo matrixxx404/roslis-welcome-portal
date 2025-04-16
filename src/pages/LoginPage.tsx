@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar/Navbar";
@@ -15,7 +14,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Pass the isRcoMember flag to the loginUser function
     const success = await loginUser(email, password, isRcoMember);
     if (success) {
       navigate("/dashboard");
@@ -28,7 +26,7 @@ const LoginPage = () => {
       <div className="container mx-auto p-8 flex justify-center items-center">
         <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
           <h2 className="text-2xl font-bold text-center mb-6 text-roslis-primary">
-            {isRcoMember ? "RCO Member Login" : "Login to ROSLIS"}
+            {isRcoMember ? "RCO Sign Up" : "Login to ROSLIS"}
           </h2>
           
           <div className="flex items-center justify-center space-x-4 mb-6">
@@ -90,7 +88,7 @@ const LoginPage = () => {
               className="w-full bg-roslis-primary text-white py-2 px-4 rounded-md hover:bg-roslis-secondary transition-colors"
               disabled={loading}
             >
-              {loading ? "Logging in..." : isRcoMember ? "Login as RCO Member" : "Login"}
+              {loading ? "Logging in..." : isRcoMember ? "RCO Sign Up" : "Login"}
             </button>
           </form>
           
